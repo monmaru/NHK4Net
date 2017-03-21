@@ -8,12 +8,12 @@ namespace NHK4Net.Internal
         internal static async Task<T> ReadAsAsync<T>(this HttpClient client, string endpoint)
         {
             Ensure.ArgumentNotNullOrEmptyString(endpoint);
-            using (var response = await client.GetAsync(endpoint).ConfigureAwait(false))
+            using (var response = await client.GetAsync(endpoint).ContextFree())
             {
                 if (response.IsSuccessStatusCode)
-                    return await response.Content.DeserializeAsString<T>().ConfigureAwait(false);
+                    return await response.Content.DeserializeAsString<T>().ContextFree();
 
-                var nhkError = await response.Content.DeserializeAsString<NHKError>().ConfigureAwait(false);
+                var nhkError = await response.Content.DeserializeAsString<NHKError>().ContextFree();
                 throw new NHKException(nhkError.Error.Code, nhkError.Error.Message);
             }
         }

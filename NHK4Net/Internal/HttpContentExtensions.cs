@@ -8,7 +8,7 @@ namespace NHK4Net.Internal
     {
         internal static async Task<T> DeserializeAsString<T>(this HttpContent content)
         {
-            var text = await content.ReadAsStringAsync().ConfigureAwait(false);
+            var text = await content.ReadAsStringAsync().ContextFree();
             return JsonConvert.DeserializeObject<T>(text);
         }
     }

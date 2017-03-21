@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Internal\TaskExtensions.cs" />
     <Compile Include="Internal\Ensure.cs" />
     <Compile Include="Internal\HttpContentExtensions.cs" />
     <Compile Include="Internal\HttpClientExtensions.cs" />
