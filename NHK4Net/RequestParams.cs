@@ -1,6 +1,6 @@
 ﻿namespace NHK4Net
 {
-    public static class NhkArea
+    public static class NHKArea
     {
         public static string 札幌 = "10";
         public static string 函館 = "11";
@@ -58,7 +58,7 @@
         public static string 沖縄 = "470";
     }
 
-    public static class NhkService
+    public static class NHKService
     {
         public static string 総合1 = "g1";
         public static string 総合2 = "g2";
@@ -81,7 +81,7 @@
         public static string 全部 = "all";
     }
 
-    public static class NhkGenre
+    public static class NHKGenre
     {
         public static string ニュース報道 = "0000";
         public static string スポーツ = "0100";

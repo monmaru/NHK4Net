@@ -13,9 +13,9 @@ namespace NHK4Net
     }
 
     [Serializable]
-    public class NhkException : Exception
+    public class NHKException : Exception
     {
-        internal NhkException(ErrorCode errorCode, string message)
+        internal NHKException(ErrorCode errorCode, string message)
             : base(message)
         {
             ErrorCode = errorCode;

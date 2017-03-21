@@ -11,12 +11,10 @@ namespace NHK4Net.Internal
             using (var response = await client.GetAsync(endpoint).ConfigureAwait(false))
             {
                 if (response.IsSuccessStatusCode)
-                {
                     return await response.Content.DeserializeAsString<T>().ConfigureAwait(false);
-                }
 
-                var e = await response.Content.DeserializeAsString<NhkError>();
-                throw new NhkException(e.Error.Code, e.Error.Message);
+                var nhkError = await response.Content.DeserializeAsString<NHKError>().ConfigureAwait(false);
+                throw new NHKException(nhkError.Error.Code, nhkError.Error.Message);
             }
         }
     }

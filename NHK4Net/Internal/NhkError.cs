@@ -1,6 +1,6 @@
 ﻿namespace NHK4Net.Internal
 {
-    public class NhkError
+    public class NHKError
     {
         public Error Error { get; set; }
     }

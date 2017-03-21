@@ -8,21 +8,23 @@ namespace NHK4Net.Console
     {
         private static void Main()
         {
-            const string apiKey = "";
+            const string apiKey = "YOUR_API_KEY";
             try
             {
-                using (var nhk = new NhkClient(apiKey))
+                using (var nhk = new NHKClient(apiKey))
                 {
-                    var programList = nhk.GetProgramList(NhkArea.東京, NhkService.総合1, DateTime.Today).Result;
+                    var programList = nhk.GetProgramList(NHKArea.東京, NHKService.総合1, DateTime.Today).Result;
                     WriteLine(programList);
                     var programId = programList.List.G1.First().Id;
-                    var programInfo = nhk.GetProgramInfo(NhkArea.東京, NhkService.総合1, programId).Result;
+                    var programInfo = nhk.GetProgramInfo(NHKArea.東京, NHKService.総合1, programId).Result;
                     WriteLine(programInfo);
-                    var programGenre = nhk.GetProgramGenre(NhkArea.東京, NhkService.総合1, NhkGenre.スポーツ, DateTime.Today).Result;
+                    var programGenre = nhk.GetProgramGenre(NHKArea.東京, NHKService.総合1, NHKGenre.スポーツ, DateTime.Today).Result;
                     WriteLine(programGenre);
+                    var nowOnAir = nhk.GetNowOnAir(NHKArea.東京, NHKService.総合1).Result;
+                    WriteLine(nowOnAir);
                 }
             }
-            catch (NhkException e)
+            catch (NHKException e)
             {
                 WriteLine(e.ErrorCode);
                 WriteLine(e.Message);

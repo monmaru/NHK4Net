@@ -51,9 +51,9 @@
     <Compile Include="Internal\HttpContentExtensions.cs" />
     <Compile Include="Internal\HttpClientExtensions.cs" />
     <Compile Include="Models.cs" />
-    <Compile Include="NhkClient.cs" />
-    <Compile Include="Internal\NhkError.cs" />
-    <Compile Include="NhkException.cs" />
+    <Compile Include="NHKClient.cs" />
+    <Compile Include="Internal\NHKError.cs" />
+    <Compile Include="NHKException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RequestParams.cs" />
   </ItemGroup>
