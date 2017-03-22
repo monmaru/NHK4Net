@@ -4,6 +4,7 @@ namespace NHK4Net
 {
     public enum ErrorCode
     {
+        Other, // This is an error not defined in the NHK番組表API.
         InvalidParameters = 1,
         NotExist,
         RateLimitExceeded,

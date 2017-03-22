@@ -37,29 +37,46 @@ namespace NHK4Net
         public override async Task<ProgramList> GetProgramList(string area, string service, DateTime date)
             => await ReadAsAsync<ProgramList>(ProgramListUrl(area, service, date)).ContextFree();
 
-        private string ProgramListUrl(string area, string service, DateTime date)
+        internal string ProgramListUrl(string area, string service, DateTime date)
             => $"{BaseUrl}/list/{area}/{service}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
         public override async Task<ProgramInfo> GetProgramInfo(string area, string service, string id)
             => await ReadAsAsync<ProgramInfo>(ProgramInfoUrl(area, service, id)).ContextFree();
 
-        private string ProgramInfoUrl(string area, string service, string id)
+        internal string ProgramInfoUrl(string area, string service, string id)
             => $"{BaseUrl}/info/{area}/{service}/{id}{JsonAndKey}{_apiKey}";
 
         public override async Task<ProgramGenre> GetProgramGenre(string area, string service, string genre, DateTime date)
             => await ReadAsAsync<ProgramGenre>(ProgramGenreUrl(area, service, genre, date)).ContextFree();
 
-        private string ProgramGenreUrl(string area, string service, string genre, DateTime date)
+        internal string ProgramGenreUrl(string area, string service, string genre, DateTime date)
             => $"{BaseUrl}/genre/{area}/{service}/{genre}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
         public override async Task<NowOnAir> GetNowOnAir(string area, string service)
             => await ReadAsAsync<NowOnAir>(NowOnAirUrl(area, service)).ContextFree();
 
-        private string NowOnAirUrl(string area, string service)
+        internal string NowOnAirUrl(string area, string service)
             => $"{BaseUrl}/now/{area}/{service}{JsonAndKey}{_apiKey}";
 
-        private async Task<T> ReadAsAsync<T>(string url)
-            => await _httpClient.ReadAsAsync<T>(url).ContextFree();
+        internal async Task<T> ReadAsAsync<T>(string url)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(url);
+            using (var response = await _httpClient.GetAsync(url).ContextFree())
+            {
+                if (response.IsSuccessStatusCode)
+                {
+                    return await response.Content.DeserializeAsString<T>().ContextFree();
+                }
+
+                var nhkError = await response.Content.DeserializeAsString<NHKError>().ContextFree();
+                if (nhkError == null)
+                {
+                    throw new NHKException(ErrorCode.Other, "Unexpected error occurred.");
+                }
+
+                throw new NHKException(nhkError.Error.Code, nhkError.Error.Message);
+            }
+        }
 
         public override void Dispose() => _httpClient?.Dispose();
     }
