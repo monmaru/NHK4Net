@@ -18,8 +18,8 @@ namespace NHK4Net.Console
                 {
                     var programs1 = nhk.GetProgramListAsync(NHKArea.東京, NHKService.総合1, DateTime.Today).Result;
                     WriteLine(programs1);
-                    var programs = nhk.GetProgramInfoAsync(NHKArea.東京, NHKService.総合1, programs1.First().Id).Result;
-                    WriteLine(programs);
+                    var descriptions = nhk.GetProgramInfoAsync(NHKArea.東京, NHKService.総合1, programs1.First().Id).Result;
+                    WriteLine(descriptions);
                     var programs2 = nhk.GetProgramGenreAsync(NHKArea.東京, NHKService.総合1, NHKGenre.スポーツ, DateTime.Today).Result;
                     WriteLine(programs2);
                     var nowOnAir = nhk.GetNowOnAirAsync(NHKArea.東京, NHKService.総合1).Result;

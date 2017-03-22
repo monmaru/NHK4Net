@@ -12,7 +12,7 @@ namespace NHK4Net
         /// <param name="area">放送地域</param>
         /// <param name="service">サービス（放送波）</param>
         /// <param name="date">日付</param>
-        /// <returns></returns>
+        /// <returns>番組リスト</returns>
         /// <exception cref="NHKException"></exception>
         public abstract Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date);
 
@@ -22,9 +22,9 @@ namespace NHK4Net
         /// <param name="area">放送地域</param>
         /// <param name="service">サービス（放送波）</param>
         /// <param name="id">番組ID</param>
-        /// <returns></returns>
+        /// <returns>番組詳細リスト</returns>
         /// <exception cref="NHKException"></exception>
-        public abstract Task<Program> GetProgramInfoAsync(string area, string service, string id);
+        public abstract Task<IEnumerable<Description>> GetProgramInfoAsync(string area, string service, string id);
 
         /// <summary>
         /// 該当する条件の番組リストを取得する。 
@@ -33,7 +33,7 @@ namespace NHK4Net
         /// <param name="service">サービス（放送波）</param>
         /// <param name="genre">ＥＰＧ番組ジャンル</param>
         /// <param name="date">日付</param>
-        /// <returns></returns>
+        /// <returns>番組リスト</returns>
         /// <exception cref="NHKException"></exception>
         public abstract Task<IEnumerable<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date);
 
@@ -42,7 +42,7 @@ namespace NHK4Net
         /// </summary>
         /// <param name="area">放送地域</param>
         /// <param name="service">サービス（放送波）</param>
-        /// <returns></returns>
+        /// <returns>現在提供中の番組</returns>
         /// <exception cref="NHKException"></exception>
         public abstract Task<NowOnAir> GetNowOnAirAsync(string area, string service);
 

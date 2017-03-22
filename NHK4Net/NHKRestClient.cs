@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using NHK4Net.Internal;
@@ -29,17 +28,17 @@ namespace NHK4Net
 
         public override async Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date)
         {
-            var obj = await ReadAsAsync<CommonRootObject>(ProgramListUrl(area, service, date)).ContextFree();
+            var obj = await ReadAsAsync<ProgramListRootObject>(ProgramListUrl(area, service, date)).ContextFree();
             return obj.List.Programs;
         }
             
         internal string ProgramListUrl(string area, string service, DateTime date)
             => $"{BaseUrl}/list/{area}/{service}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
-        public override async Task<Program> GetProgramInfoAsync(string area, string service, string id)
+        public override async Task<IEnumerable<Description>> GetProgramInfoAsync(string area, string service, string id)
         {
-            var obj = await ReadAsAsync<CommonRootObject>(ProgramInfoUrl(area, service, id)).ContextFree();
-            return obj.List.Programs.First();
+            var obj = await ReadAsAsync<DescriptionListRootObject>(ProgramInfoUrl(area, service, id)).ContextFree();
+            return obj.List.Descriptions;
         }
 
         internal string ProgramInfoUrl(string area, string service, string id)
@@ -47,7 +46,7 @@ namespace NHK4Net
 
         public override async Task<IEnumerable<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date)
         {
-            var obj = await ReadAsAsync<CommonRootObject>(ProgramGenreUrl(area, service, genre, date)).ContextFree();
+            var obj = await ReadAsAsync<ProgramListRootObject>(ProgramGenreUrl(area, service, genre, date)).ContextFree();
             return obj.List.Programs;
         }
 

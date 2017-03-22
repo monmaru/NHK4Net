@@ -106,10 +106,11 @@ namespace NHK4Net.Tests
             var url = _client.ProgramInfoUrl(area, service, id);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramInfoJson);
             // Act
-            var program = await _client.GetProgramInfoAsync(area, service, id);
+            var descriptions = await _client.GetProgramInfoAsync(area, service, id);
+            var description = descriptions.FirstOrDefault();
             // Assert
-            Assert.NotNull(program);
-            _output.WriteLine(program.Title);
+            Assert.NotNull(description);
+            _output.WriteLine(description.Title);
         }
 
         [Fact]

@@ -3,9 +3,16 @@ using Newtonsoft.Json;
 
 namespace NHK4Net
 {
-    internal class CommonRootObject
+    // http://api-portal.nhk.or.jp/doc-request#explain_area
+
+    internal class ProgramListRootObject
     {
-        public ListOfG1 List { get; set; }
+        public CollectionOfProgram List { get; set; }
+    }
+
+    internal class DescriptionListRootObject
+    {
+        public CollectionOfDescription List { get; set; }
     }
 
     internal class NowOnAirRootObject
@@ -14,7 +21,13 @@ namespace NHK4Net
         public NowOnAirList NowOnAirList { get; set; }
     }
 
-    internal class ListOfG1
+    internal class CollectionOfDescription
+    {
+        [JsonProperty("g1")]
+        public List<Description> Descriptions { get; set; }
+    }
+
+    internal class CollectionOfProgram
     {
         [JsonProperty("g1")]
         public List<Program> Programs { get; set; }
@@ -28,70 +41,219 @@ namespace NHK4Net
 
     public class NowOnAir
     {
+        /// <summary>
+        /// 前に放送した番組
+        /// ※オプション
+        /// </summary>
         public Program Previous { get; set; }
+
+        /// <summary>
+        /// 現在放送中の番組
+        /// </summary>
         public Program Present { get; set; }
+
+        /// <summary>
+        /// 次に放送予定の番組
+        /// ※オプション
+        /// </summary>
         public Program Following { get; set; }
     }
 
     public class Area
     {
+        /// <summary>
+        /// 地域ID
+        /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// 地域名
+        /// </summary>
         public string Name { get; set; }
     }
 
-    public class LogoS
+    public class Logo
     {
+        /// <summary>
+        /// ロゴ画像のURL
+        /// ※オプション
+        /// </summary>
         public string Url { get; set; }
+
+        /// <summary>
+        /// ロゴ画像の幅
+        /// ※オプション
+        /// </summary>
         public string Width { get; set; }
+
+        /// <summary>
+        /// ロゴ画像の高さ
+        /// ※オプション
+        /// </summary>
         public string Height { get; set; }
     }
 
-    public class LogoM
+    public class Extra
     {
-        public string Url { get; set; }
-        public string Width { get; set; }
-        public string Height { get; set; }
+        /// <summary>
+        /// NHKオンデマンドのコンテンツ(番組単位)
+        /// ※オプション
+        /// </summary>
+        [JsonProperty("ondemand_program")]
+        public Link OndemandProgram { get; set; }
+
+        /// <summary>
+        /// NHKオンデマンドのコンテンツ(放送回単位)
+        /// ※オプション
+        /// </summary>
+        [JsonProperty("ondemand_episode")]
+        public Link OndemandEpisode { get; set; }
     }
 
-    public class LogoL
+    public class Link
     {
+        /// <summary>
+        /// URL
+        /// ※オプション
+        /// </summary>
         public string Url { get; set; }
-        public string Width { get; set; }
-        public string Height { get; set; }
+
+        /// <summary>
+        /// タイトル
+        /// ※オプション
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// ID
+        /// ※オプション
+        /// </summary>
+        public string Id { get; set; }
     }
 
     public class Service
     {
+        /// <summary>
+        /// サービスID
+        /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// サービス名
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// サービスロゴ画像:小（Logoオブジェクト）
+        /// </summary>
         [JsonProperty("logo_s")]
-        public LogoS LogoS { get; set; }
+        public Logo LogoS { get; set; }
+
+        /// <summary>
+        /// サービスロゴ画像:中（Logoオブジェクト）
+        /// </summary>
         [JsonProperty("logo_m")]
-        public LogoM LogoM { get; set; }
+        public Logo LogoM { get; set; }
+
+        /// <summary>
+        /// サービスロゴ画像:大（Logoオブジェクト）
+        /// </summary>
         [JsonProperty("logo_l")]
-        public LogoL LogoL { get; set; }
+        public Logo LogoL { get; set; }
     }
 
     public class Program
     {
+        /// <summary>
+        /// 番組ID
+        /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// 番組イベントID
+        /// </summary>
         [JsonProperty("event_id")]
         public string EventId { get; set; }
+
+        /// <summary>
+        /// 放送開始日時（YYYY-MM-DDTHH:mm:ssZ形式）
+        /// </summary>
         [JsonProperty("start_time")]
         public string StartTime { get; set; }
+
+        /// <summary>
+        /// 放送開始日時（YYYY-MM-DDTHH:mm:ssZ形式）
+        /// </summary>
         [JsonProperty("end_time")]
         public string EndTime { get; set; }
+
+        /// <summary>
+        /// Areaオブジェクト
+        /// </summary>
         public Area Area { get; set; }
+
+        /// <summary>
+        /// Serviceオブジェクト
+        /// </summary>
         public Service Service { get; set; }
+
+        /// <summary>
+        /// 番組名
+        /// </summary>
         public string Title { get; set; }
+
+        /// <summary>
+        /// 番組内容
+        /// </summary>
         public string Subtitle { get; set; }
-        public string Content { get; set; }
-        public string Act { get; set; }
+
+        /// <summary>
+        /// 番組ジャンル
+        /// </summary>
         public List<string> Genres { get; set; }
+    }
+
+    public class Description : Program
+    {
+        /// <summary>
+        /// 番組詳細
+        /// </summary>
+        public string Content { get; set; }
+
+        /// <summary>
+        /// 出演者
+        /// </summary>
+        public string Act { get; set; }
+
+        /// <summary>
+        /// 番組ロゴ画像（Logoオブジェクト）
+        /// </summary>
         [JsonProperty("program_logo")]
-        public object ProgramLogo { get; set; }
+        public Logo ProgramLogo { get; set; }
+
+        /// <summary>
+        /// 番組サイトURL（番組単位）
+        /// ※オプション
+        /// </summary>
         [JsonProperty("program_url")]
         public string ProgramUrl { get; set; }
-        public List<object> Hashtags { get; set; }
+
+        /// <summary>
+        /// 番組サイトURL（放送回単位）
+        /// ※オプション
+        /// </summary>
+        [JsonProperty("episode_url")]
+        public string EpisodeUrl { get; set; }
+
+        /// <summary>
+        /// 番組に関連するハッシュタグ
+        /// </summary>
+        public List<string> Hashtags { get; set; }
+
+        /// <summary>
+        /// 拡張情報（Extraオブジェクト）
+        /// ※オプション
+        /// </summary>
+        public Extra Extra { get; set; }
     }
 }
