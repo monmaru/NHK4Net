@@ -5,6 +5,13 @@ This is a [NHK番組表API](http://api-portal.nhk.or.jp/) client library for C#.
 ## Dev
 Visual Studio 2017  
 
+## Requirements
+.Net Framework 4.5+
+
+## Install
+```
+PM> Install-Package NHK4Net
+```
 ## Example
 ```csharp
 const string apiKey = "YOUR_API_KEY";
