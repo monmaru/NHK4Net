@@ -8,9 +8,9 @@ namespace NHK4Net
 {
     public abstract class NHKClientBase : IDisposable
     {
-        public abstract Task<IList<Program>> GetProgramListAsync(string area, string service, DateTime date);
-        public abstract Task<IList<Program>> GetProgramInfoAsync(string area, string service, string id);
-        public abstract Task<IList<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date);
+        public abstract Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date);
+        public abstract Task<IEnumerable<Program>> GetProgramInfoAsync(string area, string service, string id);
+        public abstract Task<IEnumerable<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date);
         public abstract Task<NowOnAir> GetNowOnAirAsync(string area, string service);
         public abstract void Dispose();
     }
@@ -35,7 +35,7 @@ namespace NHK4Net
             _httpClient = httpClient;
         }
 
-        public override async Task<IList<Program>> GetProgramListAsync(string area, string service, DateTime date)
+        public override async Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date)
         {
             var obj = await ReadAsAsync<CommonRootObject>(ProgramListUrl(area, service, date)).ContextFree();
             return obj.List.Programs;
@@ -44,7 +44,7 @@ namespace NHK4Net
         internal string ProgramListUrl(string area, string service, DateTime date)
             => $"{BaseUrl}/list/{area}/{service}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
-        public override async Task<IList<Program>> GetProgramInfoAsync(string area, string service, string id)
+        public override async Task<IEnumerable<Program>> GetProgramInfoAsync(string area, string service, string id)
         {
             var obj = await ReadAsAsync<CommonRootObject>(ProgramInfoUrl(area, service, id)).ContextFree();
             return obj.List.Programs;
@@ -53,7 +53,7 @@ namespace NHK4Net
         internal string ProgramInfoUrl(string area, string service, string id)
             => $"{BaseUrl}/info/{area}/{service}/{id}{JsonAndKey}{_apiKey}";
 
-        public override async Task<IList<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date)
+        public override async Task<IEnumerable<Program>> GetProgramGenreAsync(string area, string service, string genre, DateTime date)
         {
             var obj = await ReadAsAsync<CommonRootObject>(ProgramGenreUrl(area, service, genre, date)).ContextFree();
             return obj.List.Programs;
