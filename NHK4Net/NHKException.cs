@@ -4,12 +4,33 @@ namespace NHK4Net
 {
     public enum ErrorCode
     {
-        Other, // This is an error not defined in the NHK番組表API.
+        /// <summary>
+        /// This is an error not defined in the NHK番組表API
+        /// </summary>
+        UnexpectedError, 
+        /// <summary>
+        /// Invalid parameters
+        /// </summary>
         InvalidParameters = 1,
+        /// <summary>
+        /// Sorry, that page does not exist
+        /// </summary>
         NotExist,
+        /// <summary>
+        /// Rate limit exceeded
+        /// </summary>
         RateLimitExceeded,
+        /// <summary>
+        /// Invalid or expired token
+        /// </summary>
         InvalidOrExpiredToken,
+        /// <summary>
+        /// Over capacity
+        /// </summary>
         OverCapacity,
+        /// <summary>
+        /// Internal error
+        /// </summary>
         InternalError
     }
 

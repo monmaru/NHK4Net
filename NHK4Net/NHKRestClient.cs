@@ -77,7 +77,7 @@ namespace NHK4Net
                     var nhkError = (await response.Content.DeserializeAsString<RootErrorObject>().ContextFree())?.Error;
                     if (nhkError == null)
                     {
-                        throw new NHKException(ErrorCode.Other, "Unexpected error occurred.");
+                        throw new NHKException(ErrorCode.UnexpectedError, "Unexpected error occurred.");
                     }
 
                     throw new NHKException(nhkError.Code, nhkError.Message);
@@ -85,7 +85,7 @@ namespace NHK4Net
             }
             catch (Exception ex) when(!(ex is NHKException))
             {
-                throw new NHKException(ErrorCode.Other, "Unexpected error occurred.", ex);
+                throw new NHKException(ErrorCode.UnexpectedError, "Unexpected error occurred.", ex);
             }
         }
 

@@ -155,7 +155,7 @@ namespace NHK4Net.Tests
             // Act
             var ex = await Assert.ThrowsAsync<NHKException>(() => _client.ReadAsAsync<NowOnAir>(url));
             // Assert
-            Assert.Equal(ErrorCode.Other, ex.ErrorCode);
+            Assert.Equal(ErrorCode.UnexpectedError, ex.ErrorCode);
             Assert.Equal("Unexpected error occurred.", ex.Message);
         }
 
