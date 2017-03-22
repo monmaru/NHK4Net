@@ -54,7 +54,7 @@
   <ItemGroup>
     <Compile Include="EnsureTest.cs" />
     <Compile Include="Helpers\FakeResponseHandler.cs" />
-    <Compile Include="NHKClientTest.cs" />
+    <Compile Include="NHKRestClientTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TestData.cs" />
   </ItemGroup>

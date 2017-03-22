@@ -9,18 +9,18 @@ using Xunit.Abstractions;
 
 namespace NHK4Net.Tests
 {
-    public class NHKClientTest : IDisposable
+    public class NHKRestClientTest : IDisposable
     {
         private readonly ITestOutputHelper _output;
         private readonly FakeResponseHandler _fakeHandler;
-        private readonly NHKClient _client;
+        private readonly NHKRestClient _client;
         private const string DummyApiKey = "DummyAPIKey";
 
-        public NHKClientTest(ITestOutputHelper output)
+        public NHKRestClientTest(ITestOutputHelper output)
         {
             _output = output;
             _fakeHandler = new FakeResponseHandler();
-            _client = new NHKClient(DummyApiKey, new HttpClient(_fakeHandler));
+            _client = new NHKRestClient(DummyApiKey, new HttpClient(_fakeHandler));
         }
 
         public void Dispose()
@@ -90,9 +90,10 @@ namespace NHK4Net.Tests
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramInfoJson);
             // Act
             var programs = await _client.GetProgramListAsync(area, service, today);
+            var program = programs.FirstOrDefault();
             // Assert
-            Assert.NotNull(programs.First());
-            _output.WriteLine(programs.First().Title);
+            Assert.NotNull(program);
+            _output.WriteLine(program.Title);
         }
 
         [Fact]
@@ -105,10 +106,10 @@ namespace NHK4Net.Tests
             var url = _client.ProgramInfoUrl(area, service, id);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramInfoJson);
             // Act
-            var programs = await _client.GetProgramInfoAsync(area, service, id);
+            var program = await _client.GetProgramInfoAsync(area, service, id);
             // Assert
-            Assert.NotNull(programs.First());
-            _output.WriteLine(programs.First().Title);
+            Assert.NotNull(program);
+            _output.WriteLine(program.Title);
         }
 
         [Fact]
@@ -123,9 +124,10 @@ namespace NHK4Net.Tests
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramGenreJson);
             // Act
             var programs = await _client.GetProgramGenreAsync(area, service, genre, today);
+            var program = programs.FirstOrDefault();
             // Assert
-            Assert.NotNull(programs.First());
-            _output.WriteLine(programs.First().Title);
+            Assert.NotNull(program);
+            _output.WriteLine(program.Title);
         }
 
         [Fact]

@@ -52,6 +52,7 @@
     <Compile Include="Internal\HttpContentExtensions.cs" />
     <Compile Include="Models.cs" />
     <Compile Include="NHKClient.cs" />
+    <Compile Include="NHKRestClient.cs" />
     <Compile Include="Internal\NHKError.cs" />
     <Compile Include="NHKException.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
