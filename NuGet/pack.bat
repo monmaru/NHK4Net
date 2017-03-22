@@ -1,0 +1,1 @@
+nuget pack NHK4Net.nuspec
