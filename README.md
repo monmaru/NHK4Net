@@ -12,7 +12,7 @@ Visual Studio 2017
 ```
 PM> Install-Package NHK4Net
 ```
-## Example
+## Usage
 ```csharp
 const string apiKey = "YOUR_API_KEY";
 try
@@ -29,3 +29,6 @@ catch (NHKException e)
     Console.WriteLine(e.Message);
 }
 ```
+
+## License
+Licensed under the [MIT](LICENSE) License.
