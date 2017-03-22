@@ -1,6 +1,6 @@
 # NHK4Net
-[![Build status](https://ci.appveyor.com/api/projects/status/66x3hux7575h1x8d?svg=true)](https://ci.appveyor.com/project/monmaru/nhk4net)  
 This is a [NHK番組表API](http://api-portal.nhk.or.jp/) client library for C#.  
+[![Build status](https://ci.appveyor.com/api/projects/status/66x3hux7575h1x8d?svg=true)](https://ci.appveyor.com/project/monmaru/nhk4net)  [![NuGet Package](https://img.shields.io/nuget/v/NHK4Net.svg)](https://www.nuget.org/packages/NHK4Net/)  
 
 ## Dev
 Visual Studio 2017  
