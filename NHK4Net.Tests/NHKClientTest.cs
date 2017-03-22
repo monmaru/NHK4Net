@@ -156,12 +156,19 @@ namespace NHK4Net.Tests
             Assert.Equal("Unexpected error occurred.", ex.Message);
         }
 
-        [Fact]
-        public async Task ReadAsAsyncWithApiError()
+        [Theory]
+        [InlineData(HttpStatusCode.NotModified)]
+        [InlineData(HttpStatusCode.BadRequest)]
+        [InlineData(HttpStatusCode.Unauthorized)]
+        [InlineData(HttpStatusCode.Forbidden)]
+        [InlineData(HttpStatusCode.NotFound)]
+        [InlineData(HttpStatusCode.InternalServerError)]
+        [InlineData(HttpStatusCode.ServiceUnavailable)]
+        public async Task ReadAsAsyncWithApiError(HttpStatusCode statusCode)
         {
             // Arrange
             const string url = @"http://api.nhk.or.jp/v2/pg/dummy";
-            SetupFakeResponse(url, HttpStatusCode.InternalServerError, TestData.ErrorJson);
+            SetupFakeResponse(url, statusCode, TestData.ErrorJson);
             // Act
             var ex = await Assert.ThrowsAsync<NHKException>(() => _client.ReadAsAsync<NowOnAir>(url));
             // Assert

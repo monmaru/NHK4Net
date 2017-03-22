@@ -11,9 +11,7 @@ namespace NHK4Net.Tests.Helpers
         private readonly Dictionary<Uri, HttpResponseMessage> _fakeResponses = new Dictionary<Uri, HttpResponseMessage>();
 
         public void AddFakeResponse(Uri uri, HttpResponseMessage responseMessage)
-        {
-            _fakeResponses.Add(uri, responseMessage);
-        }
+            => _fakeResponses.Add(uri, responseMessage);
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, System.Threading.CancellationToken cancellationToken)
         {
