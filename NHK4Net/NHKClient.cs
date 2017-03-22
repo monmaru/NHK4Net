@@ -73,21 +73,28 @@ namespace NHK4Net
 
         internal async Task<T> ReadAsAsync<T>(string url)
         {
-            Ensure.ArgumentNotNullOrEmptyString(url, nameof(url));
-            using (var response = await _httpClient.GetAsync(url).ContextFree())
+            try
             {
-                if (response.IsSuccessStatusCode)
+                Ensure.ArgumentNotNullOrEmptyString(url, nameof(url));
+                using (var response = await _httpClient.GetAsync(url).ContextFree())
                 {
-                    return await response.Content.DeserializeAsString<T>().ContextFree();
-                }
+                    if (response.IsSuccessStatusCode)
+                    {
+                        return await response.Content.DeserializeAsString<T>().ContextFree();
+                    }
 
-                var nhkError = await response.Content.DeserializeAsString<NHKError>().ContextFree();
-                if (nhkError == null)
-                {
-                    throw new NHKException(ErrorCode.Other, "Unexpected error occurred.");
-                }
+                    var nhkError = (await response.Content.DeserializeAsString<RootErrorObject>().ContextFree())?.Error;
+                    if (nhkError == null)
+                    {
+                        throw new NHKException(ErrorCode.Other, "Unexpected error occurred.");
+                    }
 
-                throw new NHKException(nhkError.Error.Code, nhkError.Error.Message);
+                    throw new NHKException(nhkError.Code, nhkError.Message);
+                }
+            }
+            catch (Exception ex) when(!(ex is NHKException))
+            {
+                throw new NHKException(ErrorCode.Other, "Unexpected error occurred.", ex);
             }
         }
 

@@ -1,11 +1,11 @@
 ﻿namespace NHK4Net.Internal
 {
-    internal class NHKError
+    internal class RootErrorObject
     {
-        public Error Error { get; set; }
+        public NHKError Error { get; set; }
     }
 
-    internal class Error
+    internal class NHKError
     {
         public ErrorCode Code { get; set; }
         public string Message { get; set; }

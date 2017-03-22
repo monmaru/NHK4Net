@@ -17,7 +17,12 @@ namespace NHK4Net
     public class NHKException : Exception
     {
         internal NHKException(ErrorCode errorCode, string message)
-            : base(message)
+            : this(errorCode, message, null)
+        {
+        }
+
+        internal NHKException(ErrorCode errorCode, string message, Exception innerException)
+           : base(message, innerException)
         {
             ErrorCode = errorCode;
         }
