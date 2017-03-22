@@ -7,10 +7,10 @@ namespace NHK4Net
 {
     public abstract class NHKClientBase : IDisposable
     {
-        public abstract Task<ProgramList> GetProgramList(string area, string service, DateTime date);
-        public abstract Task<ProgramInfo> GetProgramInfo(string area, string service, string id);
-        public abstract Task<ProgramGenre> GetProgramGenre(string area, string service, string genre, DateTime date);
-        public abstract Task<NowOnAir> GetNowOnAir(string area, string service);
+        public abstract Task<ProgramList> GetProgramListAsync(string area, string service, DateTime date);
+        public abstract Task<ProgramInfo> GetProgramInfoAsync(string area, string service, string id);
+        public abstract Task<ProgramGenre> GetProgramGenreAsync(string area, string service, string genre, DateTime date);
+        public abstract Task<NowOnAir> GetNowOnAirAsync(string area, string service);
         public abstract void Dispose();
     }
 
@@ -34,25 +34,25 @@ namespace NHK4Net
             _httpClient = httpClient;
         }
 
-        public override async Task<ProgramList> GetProgramList(string area, string service, DateTime date)
+        public override async Task<ProgramList> GetProgramListAsync(string area, string service, DateTime date)
             => await ReadAsAsync<ProgramList>(ProgramListUrl(area, service, date)).ContextFree();
 
         internal string ProgramListUrl(string area, string service, DateTime date)
             => $"{BaseUrl}/list/{area}/{service}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
-        public override async Task<ProgramInfo> GetProgramInfo(string area, string service, string id)
+        public override async Task<ProgramInfo> GetProgramInfoAsync(string area, string service, string id)
             => await ReadAsAsync<ProgramInfo>(ProgramInfoUrl(area, service, id)).ContextFree();
 
         internal string ProgramInfoUrl(string area, string service, string id)
             => $"{BaseUrl}/info/{area}/{service}/{id}{JsonAndKey}{_apiKey}";
 
-        public override async Task<ProgramGenre> GetProgramGenre(string area, string service, string genre, DateTime date)
+        public override async Task<ProgramGenre> GetProgramGenreAsync(string area, string service, string genre, DateTime date)
             => await ReadAsAsync<ProgramGenre>(ProgramGenreUrl(area, service, genre, date)).ContextFree();
 
         internal string ProgramGenreUrl(string area, string service, string genre, DateTime date)
             => $"{BaseUrl}/genre/{area}/{service}/{genre}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
-        public override async Task<NowOnAir> GetNowOnAir(string area, string service)
+        public override async Task<NowOnAir> GetNowOnAirAsync(string area, string service)
             => await ReadAsAsync<NowOnAir>(NowOnAirUrl(area, service)).ContextFree();
 
         internal string NowOnAirUrl(string area, string service)
