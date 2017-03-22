@@ -3,42 +3,34 @@ using Newtonsoft.Json;
 
 namespace NHK4Net
 {
-    public class ProgramList
+    internal class CommonRootObject
     {
         public ListOfG1 List { get; set; }
     }
 
-    public class ProgramInfo
-    {
-        public ListOfG1 List { get; set; }
-    }
-
-    public class ProgramGenre
-    {
-        public ListOfG1 List { get; set; }
-    }
-
-    public class NowOnAir
+    internal class NowOnAirRootObject
     {
         [JsonProperty("nowonair_list")]
         public NowOnAirList NowOnAirList { get; set; }
     }
 
-    public class ListOfG1
+    internal class ListOfG1
     {
-        public List<G1> G1 { get; set; }
+        [JsonProperty("g1")]
+        public List<Program> Programs { get; set; }
     }
 
-    public class NowOnAirList
+    internal class NowOnAirList
     {
-        public NowOnAirSet G1 { get; set; }
+        [JsonProperty("g1")]
+        public NowOnAir NowOnAir { get; set; }
     }
 
-    public class NowOnAirSet
+    public class NowOnAir
     {
-        public G1 Previous { get; set; }
-        public G1 Present { get; set; }
-        public G1 Following { get; set; }
+        public Program Previous { get; set; }
+        public Program Present { get; set; }
+        public Program Following { get; set; }
     }
 
     public class Area
@@ -80,7 +72,7 @@ namespace NHK4Net
         public LogoL LogoL { get; set; }
     }
 
-    public class G1
+    public class Program
     {
         public string Id { get; set; }
         [JsonProperty("event_id")]

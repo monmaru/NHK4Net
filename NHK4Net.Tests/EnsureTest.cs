@@ -1,6 +1,7 @@
 ﻿using System;
 using NHK4Net.Internal;
 using Xunit;
+// ReSharper disable ExpressionIsAlwaysNull
 
 namespace NHK4Net.Tests
 {
@@ -9,14 +10,17 @@ namespace NHK4Net.Tests
         [Fact]
         public void ArgumentNotNullTest()
         {
-            Assert.Throws<ArgumentNullException>(() => Ensure.ArgumentNotNull(null));
+            object obj = null;
+            Assert.Throws<ArgumentNullException>(() => Ensure.ArgumentNotNull(obj, nameof(obj)));
         }
 
         [Fact]
         public void ArgumentNotNullOrEmptyStringTest()
         {
-            Assert.Throws<ArgumentNullException>(() => Ensure.ArgumentNotNullOrEmptyString(null));
-            Assert.Throws<ArgumentException>(() => Ensure.ArgumentNotNullOrEmptyString(string.Empty));
+            string nullString = null;
+            var emptyString = string.Empty;
+            Assert.Throws<ArgumentNullException>(() => Ensure.ArgumentNotNullOrEmptyString(nullString, nameof(nullString)));
+            Assert.Throws<ArgumentException>(() => Ensure.ArgumentNotNullOrEmptyString(emptyString, nameof(emptyString)));
         }
     }
 }

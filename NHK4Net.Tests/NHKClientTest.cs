@@ -89,10 +89,10 @@ namespace NHK4Net.Tests
             var url = _client.ProgramListUrl(area, service, today);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramInfoJson);
             // Act
-            var programList = await _client.GetProgramListAsync(area, service, today);
+            var programs = await _client.GetProgramListAsync(area, service, today);
             // Assert
-            Assert.NotNull(programList.List.G1.First());
-            _output.WriteLine(programList.List.G1.First().Title);
+            Assert.NotNull(programs.First());
+            _output.WriteLine(programs.First().Title);
         }
 
         [Fact]
@@ -105,10 +105,10 @@ namespace NHK4Net.Tests
             var url = _client.ProgramInfoUrl(area, service, id);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramInfoJson);
             // Act
-            var programInfo = await _client.GetProgramInfoAsync(area, service, id);
+            var programs = await _client.GetProgramInfoAsync(area, service, id);
             // Assert
-            Assert.NotNull(programInfo.List.G1.First());
-            _output.WriteLine(programInfo.List.G1.First().Title);
+            Assert.NotNull(programs.First());
+            _output.WriteLine(programs.First().Title);
         }
 
         [Fact]
@@ -122,10 +122,10 @@ namespace NHK4Net.Tests
             var url = _client.ProgramGenreUrl(area, service, genre, today);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramGenreJson);
             // Act
-            var programGenre = await _client.GetProgramGenreAsync(area, service, genre, today);
+            var programs = await _client.GetProgramGenreAsync(area, service, genre, today);
             // Assert
-            Assert.NotNull(programGenre.List.G1.First());
-            _output.WriteLine(programGenre.List.G1.First().Title);
+            Assert.NotNull(programs.First());
+            _output.WriteLine(programs.First().Title);
         }
 
         [Fact]
@@ -137,10 +137,10 @@ namespace NHK4Net.Tests
             var url = _client.NowOnAirUrl(area, service);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.NowOnAirJson);
             // Act
-            var nowOnAir = await _client.GetNowOnAirAsync(area, service);
+            var nowOnAirSet = await _client.GetNowOnAirAsync(area, service);
             // Assert
-            Assert.NotNull(nowOnAir.NowOnAirList.G1.Present);
-            _output.WriteLine(nowOnAir.NowOnAirList.G1.Present.Title);
+            Assert.NotNull(nowOnAirSet.Present);
+            _output.WriteLine(nowOnAirSet.Present.Title);
         }
 
         [Fact]

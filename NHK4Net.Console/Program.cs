@@ -16,13 +16,12 @@ namespace NHK4Net.Console
             {
                 using (var nhk = new NHKClient(apiKey))
                 {
-                    var programList = nhk.GetProgramListAsync(NHKArea.東京, NHKService.総合1, DateTime.Today).Result;
-                    WriteLine(programList);
-                    var programId = programList.List.G1.First().Id;
-                    var programInfo = nhk.GetProgramInfoAsync(NHKArea.東京, NHKService.総合1, programId).Result;
-                    WriteLine(programInfo);
-                    var programGenre = nhk.GetProgramGenreAsync(NHKArea.東京, NHKService.総合1, NHKGenre.スポーツ, DateTime.Today).Result;
-                    WriteLine(programGenre);
+                    var programs1 = nhk.GetProgramListAsync(NHKArea.東京, NHKService.総合1, DateTime.Today).Result;
+                    WriteLine(programs1);
+                    var programs2 = nhk.GetProgramInfoAsync(NHKArea.東京, NHKService.総合1, programs1.First().Id).Result;
+                    WriteLine(programs2);
+                    var programs3 = nhk.GetProgramGenreAsync(NHKArea.東京, NHKService.総合1, NHKGenre.スポーツ, DateTime.Today).Result;
+                    WriteLine(programs3);
                     var nowOnAir = nhk.GetNowOnAirAsync(NHKArea.東京, NHKService.総合1).Result;
                     WriteLine(nowOnAir);
                 }
