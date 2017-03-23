@@ -6,7 +6,7 @@ This is a [NHK番組表API](http://api-portal.nhk.or.jp/) client library for C#.
 Visual Studio 2017  
 
 ## Requirements
-.Net Framework 4.6+
+.Net Framework 4.5+
 
 ## Install
 ```

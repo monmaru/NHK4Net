@@ -13,17 +13,29 @@ namespace NHK4Net
         private readonly string _apiKey;
         private readonly HttpClient _httpClient;
 
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="apiKey"></param>
         public NHKRestClient(string apiKey)
-            : this(apiKey, new HttpClient())
-        {
-        }
-
-        internal NHKRestClient(string apiKey, HttpClient httpClient)
         {
             Ensure.ArgumentNotNullOrEmptyString(apiKey, nameof(apiKey));
-            Ensure.ArgumentNotNull(httpClient, nameof(httpClient));
             _apiKey = apiKey;
-            _httpClient = httpClient;
+            _httpClient = new HttpClient();
+        }
+
+        /// <summary>
+        /// Constructor to use when customizing HTTP communication.
+        /// For example, under a proxy environment.
+        /// </summary>
+        /// <param name="apiKey"></param>
+        /// <param name="httpMessageHandler"></param>
+        public NHKRestClient(string apiKey, HttpMessageHandler httpMessageHandler)
+        {
+            Ensure.ArgumentNotNullOrEmptyString(apiKey, nameof(apiKey));
+            Ensure.ArgumentNotNull(httpMessageHandler, nameof(httpMessageHandler));
+            _apiKey = apiKey;
+            _httpClient = new HttpClient(httpMessageHandler);
         }
 
         public override async Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date)

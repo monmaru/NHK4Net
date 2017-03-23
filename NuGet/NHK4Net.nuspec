@@ -2,19 +2,20 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
     <metadata>
         <id>NHK4Net</id>
-        <version>0.1.2</version>
+        <version>0.1.3</version>
         <authors>monmaru</authors>
         <owners>monmaru</owners>
         <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
         <projectUrl>https://github.com/monmaru/NHK4Net</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>This is a NHK番組表API client library for C#</description>
+        <language>ja-JP</language>
         <tags>NHK HttpClient</tags>
         <dependencies>
             <dependency id="Newtonsoft.Json" version="10.0.1" />
         </dependencies>
     </metadata>
     <files>
-        <file src="..\NHK4Net\bin\Release\NHK4Net.dll" target="lib\net46" />
+        <file src="..\NHK4Net\bin\Release\NHK4Net.dll" target="lib\net45" />
     </files>
 </package>

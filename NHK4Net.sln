@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHK4Net.Console", "NHK4Net.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHK4Net.Tests", "NHK4Net.Tests\NHK4Net.Tests.csproj", "{3452DEE3-614C-4EC9-AED0-E6415B845084}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A438CC64-FB66-4E0C-815C-57916F1E3D1B}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{A438CC64-FB66-4E0C-815C-57916F1E3D1B}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection

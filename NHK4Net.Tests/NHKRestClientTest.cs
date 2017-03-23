@@ -20,7 +20,7 @@ namespace NHK4Net.Tests
         {
             _output = output;
             _fakeHandler = new FakeResponseHandler();
-            _client = new NHKRestClient(DummyApiKey, new HttpClient(_fakeHandler));
+            _client = new NHKRestClient(DummyApiKey, _fakeHandler);
         }
 
         public void Dispose()
