@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace NHK4Net
 {
@@ -49,5 +50,11 @@ namespace NHK4Net
         }
 
         public ErrorCode ErrorCode { get; }
+
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("ErrorCode", ErrorCode);
+        }
     }
 }

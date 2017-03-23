@@ -6,7 +6,7 @@ using NHK4Net.Internal;
 
 namespace NHK4Net
 {
-    public class NHKRestClient : NHKClient
+    public sealed class NHKRestClient : NHKClient
     {
         private const string BaseUrl = @"http://api.nhk.or.jp/v2/pg";
         private const string JsonAndKey = ".json?key=";
@@ -38,12 +38,24 @@ namespace NHK4Net
             _httpClient = new HttpClient(httpMessageHandler);
         }
 
+        public override TimeSpan Timeout
+        {
+            get
+            {
+                return _httpClient.Timeout;
+            }
+            set
+            {
+                _httpClient.Timeout = value;
+            }
+        }
+
         public override async Task<IEnumerable<Program>> GetProgramListAsync(string area, string service, DateTime date)
         {
             var obj = await ReadAsAsync<ProgramListRootObject>(ProgramListUrl(area, service, date)).ContextFree();
             return obj.List.Programs;
         }
-            
+
         internal string ProgramListUrl(string area, string service, DateTime date)
             => $"{BaseUrl}/list/{area}/{service}/{date:yyyy-MM-dd}{JsonAndKey}{_apiKey}";
 
@@ -95,12 +107,29 @@ namespace NHK4Net
                     throw new NHKException(nhkError.Code, nhkError.Message);
                 }
             }
-            catch (Exception ex) when(!(ex is NHKException))
+            catch (Exception ex) when (!(ex is NHKException))
             {
                 throw new NHKException(ErrorCode.UnexpectedError, "Unexpected error occurred.", ex);
             }
         }
 
-        public override void Dispose() => _httpClient?.Dispose();
+        #region Dispose Pattern
+        private bool _disposed;
+
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _httpClient.Dispose();
+            }
+
+            _disposed = true;
+        }
+        #endregion
     }
 }

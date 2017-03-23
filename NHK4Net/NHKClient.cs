@@ -46,6 +46,18 @@ namespace NHK4Net
         /// <exception cref="NHKException"></exception>
         public abstract Task<NowOnAir> GetNowOnAirAsync(string area, string service);
 
-        public abstract void Dispose();
-    }   
+        /// <summary>
+        /// タイムアウト値の設定
+        /// </summary>
+        public abstract TimeSpan Timeout { get; set; }
+
+        #region Dispose Pattern
+        protected abstract void Dispose(bool disposing);
+
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+        #endregion Dispose Pattern
+    }
 }

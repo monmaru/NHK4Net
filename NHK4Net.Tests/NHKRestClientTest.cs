@@ -9,7 +9,7 @@ using Xunit.Abstractions;
 
 namespace NHK4Net.Tests
 {
-    public class NHKRestClientTest : IDisposable
+    public sealed class NHKRestClientTest : IDisposable
     {
         private readonly ITestOutputHelper _output;
         private readonly FakeResponseHandler _fakeHandler;
@@ -25,8 +25,8 @@ namespace NHK4Net.Tests
 
         public void Dispose()
         {
-            _fakeHandler?.Dispose();
-            _client?.Dispose();
+            _fakeHandler.Dispose();
+            _client.Dispose();
         }
 
         private void SetupFakeResponse(string url, HttpStatusCode statusCode, string json)
