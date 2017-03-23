@@ -88,6 +88,7 @@ namespace NHK4Net
 
         internal async Task<T> ReadAsAsync<T>(string url)
         {
+            ThrowExceptionIfDisposed();
             try
             {
                 Ensure.ArgumentNotNullOrEmptyString(url, nameof(url));
@@ -95,10 +96,10 @@ namespace NHK4Net
                 {
                     if (response.IsSuccessStatusCode)
                     {
-                        return await response.Content.DeserializeAsString<T>().ContextFree();
+                        return await response.Content.DeserializeAsJsonAsync<T>().ContextFree();
                     }
 
-                    var nhkError = (await response.Content.DeserializeAsString<RootErrorObject>().ContextFree())?.Error;
+                    var nhkError = (await response.Content.DeserializeAsJsonAsync<RootErrorObject>().ContextFree())?.Error;
                     if (nhkError == null)
                     {
                         throw new NHKException(ErrorCode.UnexpectedError, "Unexpected error occurred.");
@@ -129,6 +130,14 @@ namespace NHK4Net
             }
 
             _disposed = true;
+        }
+
+        private void ThrowExceptionIfDisposed()
+        {
+            if (_disposed)
+            {
+                throw new ObjectDisposedException(GetType().FullName);
+            }
         }
         #endregion
     }

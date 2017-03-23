@@ -147,7 +147,7 @@ namespace NHK4Net.Tests
         }
 
         [Fact]
-        public async Task ReadAsAsyncWithCustomError()
+        public async Task ReadAsAsyncUnexpectedError()
         {
             // Arrange
             const string url = @"http://api.nhk.or.jp/v2/pg/dummy";
@@ -167,7 +167,7 @@ namespace NHK4Net.Tests
         [InlineData(HttpStatusCode.NotFound)]
         [InlineData(HttpStatusCode.InternalServerError)]
         [InlineData(HttpStatusCode.ServiceUnavailable)]
-        public async Task ReadAsAsyncWithApiError(HttpStatusCode statusCode)
+        public async Task ReadAsAsyncApiError(HttpStatusCode statusCode)
         {
             // Arrange
             const string url = @"http://api.nhk.or.jp/v2/pg/dummy";
@@ -176,6 +176,15 @@ namespace NHK4Net.Tests
             var ex = await Assert.ThrowsAsync<NHKException>(() => _client.ReadAsAsync<NowOnAir>(url));
             // Assert
             Assert.Equal(ErrorCode.InvalidParameters, ex.ErrorCode);
+        }
+
+        [Fact]
+        public async Task ReadAsAsyncDisposed()
+        {
+            // Arrange
+            _client.Dispose();
+            // Act & Assert
+            await Assert.ThrowsAsync<ObjectDisposedException>(() => _client.ReadAsAsync<NowOnAir>("dummy"));
         }
     }
 }
