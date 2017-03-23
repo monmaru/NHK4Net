@@ -27,6 +27,8 @@ catch (NHKException e)
     Console.WriteLine(e.Message);
 }
 ```
+## TODO
+- [ ] Migrate to .NET Standard
 
 ## License
 Licensed under the [MIT](LICENSE) License.
