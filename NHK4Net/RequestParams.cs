@@ -81,19 +81,172 @@
         public static readonly string 全部 = "all";
     }
 
+    /// <summary>
+    /// 「デジタル放送に使用する番組配列情報標準規格」
+    /// ARIB STD-B10 デジタル放送に使用する番組配列情報標準規格 5.1版
+    /// </summary>
     public static class NHKGenre
     {
-        public static readonly string ニュース報道 = "0000";
-        public static readonly string スポーツ = "0100";
-        public static readonly string 情報ワイドショー = "0205";
-        public static readonly string 国内ドラマ = "0300";
-        public static readonly string 音楽 = "0409";
-        public static readonly string バラエティ = "0502";
-        public static readonly string 映画 = "0600";
-        public static readonly string アニメ特撮 = "0700";
-        public static readonly string ドキュメンタリー教養 = "0800";
-        public static readonly string 劇場公演 = "0903";
-        public static readonly string 趣味教育 = "1000";
-        public static readonly string 福祉 = "1100";
+        public static class ニュース＿報道
+        {
+            public static readonly string 定時＿総合 = "0000";
+            public static readonly string 天気 = "0001";
+            public static readonly string 特集＿ドキュメント = "0002";
+            public static readonly string 政治＿国会 = "0003";
+            public static readonly string 経済＿市況 = "0004";
+            public static readonly string 海外＿国際 = "0005";
+            public static readonly string 解説 = "0006";
+            public static readonly string 討論＿会談 = "0007";
+            public static readonly string 報道特番 = "0008";
+            public static readonly string ローカル＿地域 = "0009";
+            public static readonly string 交通 = "0010";
+            public static readonly string その他 = "0015";
+        }
+
+        public static class スポーツ
+        {
+            public static readonly string スポーツニュース = "0100";
+            public static readonly string 野球 = "0101";
+            public static readonly string サッカー = "0102";
+            public static readonly string ゴルフ = "0103";
+            public static readonly string その他の球技 = "0104";
+            public static readonly string 相撲＿格闘技 = "0105";
+            public static readonly string オリンピック＿国際大会 = "0106";
+            public static readonly string マラソン＿陸上＿水泳 = "0107";
+            public static readonly string モータースポーツ = "0108";
+            public static readonly string マリン＿ウィンタースポーツ = "0109";
+            public static readonly string 競馬＿公営競技 = "0110";
+            public static readonly string その他 = "0115";
+        }
+
+        public static class 情報＿ワイドショー
+        {
+            public static readonly string 芸能＿ワイドショー = "0200";
+            public static readonly string ファッション = "0201";
+            public static readonly string 暮らし＿住まい = "0202";
+            public static readonly string 健康＿医療 = "0203";
+            public static readonly string ショッピング＿通販 = "0204";
+            public static readonly string グルメ＿料理 = "0205";
+            public static readonly string イベント = "0206";
+            public static readonly string 番組紹介＿お知らせ = "0207";
+            public static readonly string その他 = "0215";
+        }
+
+        public static class ドラマ
+        {
+            public static readonly string 国内ドラマ = "0300";
+            public static readonly string 海外ドラマ = "0301";
+            public static readonly string 時代劇 = "0302";
+            public static readonly string その他 = "0315";
+        }
+
+        public static class 音楽
+        {
+            public static readonly string 国内ロック＿ポップス = "0400";
+            public static readonly string 海外ロック＿ポップス = "0401";
+            public static readonly string クラシック＿オペラ = "0402";
+            public static readonly string ジャズ＿フュージョン = "0403";
+            public static readonly string 歌謡曲＿演歌 = "0404";
+            public static readonly string ライブ＿コンサート＿ = "0405";
+            public static readonly string ランキング＿リクエスト = "0406";
+            public static readonly string カラオケ＿のど自慢 = "0407";
+            public static readonly string 民謡＿邦楽 = "0408";
+            public static readonly string 童謡＿キッズ = "0409";
+            public static readonly string 民族音楽＿ワールドミュージック = "0410";
+            public static readonly string その他 = "0415";
+        }
+
+
+        public static class バラエティ
+        {
+            public static readonly string クイズ = "0500";
+            public static readonly string ゲーム = "0501";
+            public static readonly string トークバラエティ = "0502";
+            public static readonly string お笑い＿コメディ = "0503";
+            public static readonly string 音楽バラエティ = "0504";
+            public static readonly string 旅バラエティ = "0505";
+            public static readonly string 料理バラエティ = "0506";
+            public static readonly string その他 = "0515";
+        }
+
+        public static class 映画
+        {
+            public static readonly string 洋画 = "0600";
+            public static readonly string 邦画 = "0601";
+            public static readonly string アニメ = "0602";
+            public static readonly string その他 = "0615";
+        }
+
+        public static class アニメ＿特撮
+        {
+            public static readonly string 国内アニメ = "0700";
+            public static readonly string 海外アニメ = "0701";
+            public static readonly string 特撮 = "0702";
+            public static readonly string その他 = "0715";
+        }
+
+        public static class ドキュメンタリー＿教養
+        {
+            public static readonly string 社会＿時事 = "0800";
+            public static readonly string 歴史＿紀行 = "0801";
+            public static readonly string 自然＿動物＿環境 = "0802";
+            public static readonly string 宇宙＿科学＿医学 = "0803";
+            public static readonly string カルチャー＿伝統文化 = "0804";
+            public static readonly string 文学＿文芸 = "0805";
+            public static readonly string スポーツ＿ = "0806";
+            public static readonly string ドキュメンタリー全般 = "0807";
+            public static readonly string インタビュー＿討論 = "0808";
+            public static readonly string その他 = "0815";
+        }
+
+        public static class 劇場＿公演
+        {
+            public static readonly string 現代劇＿新劇 = "0900";
+            public static readonly string ミュージカル = "0901";
+            public static readonly string ダンス＿バレエ = "0902";
+            public static readonly string 落語＿園芸 = "0903";
+            public static readonly string 歌舞伎＿古典 = "0904";
+            public static readonly string その他 = "0915";
+        }
+
+        public static class 趣味＿教育
+        {
+            public static readonly string 旅＿釣り＿アウトドア = "1000";
+            public static readonly string 園芸＿ペット＿手芸 = "1001";
+            public static readonly string 音楽＿美術＿工芸 = "1002";
+            public static readonly string 囲碁＿将棋 = "1003";
+            public static readonly string 麻雀＿パチンコ = "1004";
+            public static readonly string 車＿オートバイ = "1005";
+            public static readonly string コンピュータ＿TVゲーム = "1006";
+            public static readonly string 会話＿語学 = "1007";
+            public static readonly string 幼児＿小学生 = "1008";
+            public static readonly string 中学生＿高校生 = "1009";
+            public static readonly string 大学生＿受験 = "1010";
+            public static readonly string 生涯教育＿資格 = "1011";
+            public static readonly string 教育問題 = "1012";
+            public static readonly string その他 = "1015";
+        }
+
+        public static class 福祉
+        {
+            public static readonly string 高齢者 = "1100";
+            public static readonly string 障害者 = "1101";
+            public static readonly string 社会福祉 = "1102";
+            public static readonly string ボランティア = "1103";
+            public static readonly string 手話 = "1104";
+            public static readonly string 文字＿字幕 = "1105";
+            public static readonly string 音声解説 = "1106";
+            public static readonly string その他 = "1115";
+        }
+
+        public static class 拡張
+        {
+            public static readonly string BS＿地上デジタル放送用番組付属情報 = "1400";
+            public static readonly string 広帯域CSデジタル放送用拡張 = "1401";
+            public static readonly string サーバー型番組付属情報 = "1403";
+            public static readonly string IP放送用番組付属情報 = "1404";
+        }
+
+        public static readonly string その他全般 = "1515";
     }
 }

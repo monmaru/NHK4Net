@@ -6,23 +6,19 @@ namespace NHK4Net.Internal
     {
         internal static void ArgumentNotNull(object value, string name)
         {
-            if (value != null)
+            if (value == null)
             {
-                return;
+                throw new ArgumentNullException(name);
             }
-
-            throw new ArgumentNullException(name);
         }
 
         internal static void ArgumentNotNullOrEmptyString(string value, string name)
         {
             ArgumentNotNull(value, name);
-            if (!string.IsNullOrWhiteSpace(value))
+            if (string.IsNullOrWhiteSpace(value))
             {
-                return;
+                throw new ArgumentException("String cannot be empty", name);
             }
-
-            throw new ArgumentException("String cannot be empty", name);
         }
     }
 }

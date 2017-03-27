@@ -119,7 +119,7 @@ namespace NHK4Net.Tests
             // Arrange
             var area = NHKArea.東京;
             var service = NHKService.総合1;
-            var genre = NHKGenre.スポーツ;
+            var genre = NHKGenre.スポーツ.スポーツニュース;
             var today = DateTime.Today;
             var url = _client.ProgramGenreUrl(area, service, genre, today);
             SetupFakeResponse(url, HttpStatusCode.OK, TestData.ProgramGenreJson);
